@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Flask MVP</title>
-        </head>
-        <body>
-            <h1>Flask MVP Website</h1>
-            <p>這是一個最小可行版本的 Flask 網站。</p>
-        </body>
-    </html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>學生管理系統 - CRUD</title>
+    <style>
+        table { width: 50%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>SQL CRUD 學生管理系統</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="name" placeholder="姓名" required>
+        <input type="text" name="major" placeholder="系級" required>
+        <button type="submit">新增學生</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>系級</th>
+            <th>操作</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.major }}</td>
+            <td>
+                <a href="/delete/{{ s.id }}" onclick="return confirm('確定刪除嗎？')">刪除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
