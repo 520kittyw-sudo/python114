@@ -1,2 +1,4 @@
-# python114
-程式設計
+git pull
+git add .
+git commit -m "更新內容"
+git push
