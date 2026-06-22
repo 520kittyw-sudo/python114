@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>幾何賽局挑戰</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>🎲 機率賽局：請分配妳的籌碼風險度</h2>
+        <p>（請拉動滑桿，數值越高代表在該回合願意冒越高風險追求高回報）</p>
+        
+        <form method="POST">
+            <label>妳的名字：</label>
+            <input type="text" name="player_name" required placeholder="請輸入名字"><br><br>
+            
+            <div class="game-round">
+                <label>第一回合（平穩市場）：</label>
+                <input type="range" name="round1" min="0" max="100" value="50">
+            </div>
+            <div class="game-round">
+                <label>第二回合（未知暴風雨）：</label>
+                <input type="range" name="round2" min="0" max="100" value="50">
+            </div>
+            <div class="game-round">
+                <label>第三回合（終極終點線）：</label>
+                <input type="range" name="round3" min="0" max="100" value="50">
+            </div>
+            
+            <button type="submit" class="btn">送出決策，進行數學矩陣分析</button>
+        </form>
+    </div>
+</body>
+</html>

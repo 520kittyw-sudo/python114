@@ -1,62 +1,62 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request
+import numpy as np
 import os
 
 app = Flask(__name__)
 
-# 設定資料庫路徑 (使用 SQLite)
-db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'students.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# 確保路徑設定正確
+current_dir = os.path.dirname(os.path.abspath(__file__))
+template_dir = os.path.join(current_dir, 'templates')
 
-# 定義資料庫模型 (這裡以學生資料為例)
-class Student(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    major = db.Column(db.String(50), nullable=False)
+# --- 核心分析模型 ---
+def analyze_game_behavior(choices):
+    """計算玩家決策特質"""
+    arr = np.array(choices)
+    mean = np.mean(arr)
+    variance = np.var(arr)
+    
+    if variance < 100:
+        personality = "海之平穩：你傾向於深思熟慮，在動盪中尋求安全感。"
+    elif variance < 800:
+        personality = "山海共鳴：你在保守與冒險間有獨特的平衡感。"
+    else:
+        personality = "山之巔峰：你是一位冒險家，敢於在極端機率中追求勝利。"
+    return round(mean, 2), round(variance, 2), personality
 
-# 自動建立資料庫檔案
-with app.app_context():
-    db.create_all()
-
-# --- CRUD 功能路由 ---
-
-# Read: 讀取所有資料並顯示
+# --- 路由與首頁 ---
 @app.route('/')
 def index():
-    students = Student.query.all()
-    return render_template('index.html', students=students)
+    # 這裡保留你原本定義的所有變數，就不會報 'info' is undefined 了
+    project_info = {
+        "title": "幾何人格：山海特質心理賽局網站",
+        "description": "本網站結合『動態網頁爬蟲』與『機率統計變異數分析』...",
+        "member": "黃琦瑤",
+        "department": "數學系資訊數學組"
+    }
+    return render_template('index.html', info=project_info)
 
-# Create: 新增資料
-@app.route('/add', methods=['POST'])
-def add_student():
-    name = request.form.get('name')
-    major = request.form.get('major')
-    if name and major:
-        new_student = Student(name=name, major=major)
-        db.session.add(new_student)
-        db.session.commit()
-    return redirect(url_for('index'))
-
-# Delete: 刪除資料
-@app.route('/delete/<int:id>')
-def delete_student(id):
-    student = Student.query.get(id)
-    if student:
-        db.session.delete(student)
-        db.session.commit()
-    return redirect(url_for('index'))
-
-# Update: 修改資料 (這裡簡化為編輯頁面)
-@app.route('/update/<int:id>', methods=['POST'])
-def update_student(id):
-    student = Student.query.get(id)
-    if student:
-        student.name = request.form.get('name')
-        student.major = request.form.get('major')
-        db.session.commit()
-    return redirect(url_for('index'))
+# --- 遊戲與邏輯 ---
+@app.route('/game', methods=['GET', 'POST'])
+def game():
+    if request.method == 'POST':
+        # 確保三個回合數值都能抓到
+        try:
+            r1 = float(request.form.get('round1', 50))
+            r2 = float(request.form.get('round2', 50))
+            r3 = float(request.form.get('round3', 50))
+            name = request.form.get('player_name', '匿名挑戰者')
+            
+            mean, var, personality = analyze_game_behavior([r1, r2, r3])
+            
+            return render_template('result.html', 
+                                   name=name, 
+                                   mean=mean, 
+                                   var=var, 
+                                   personality=personality)
+        except Exception as e:
+            return f"運算錯誤: {str(e)}"
+            
+    return render_template('game.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
