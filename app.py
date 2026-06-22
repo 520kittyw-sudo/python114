@@ -6,14 +6,7 @@ app = Flask(__name__)
 # 首頁
 @app.route('/')
 def index():
-    info_data = {
-        "title": "幾何人格：山海特質心理賽局網站",
-        "member": "黃琦瑤",
-        "department": "數學系資訊數學組",
-        "description": "本網站結合『動態網頁爬蟲』與『機率統計變異數分析』..."
-    }
-    return render_template('index.html', info=info_data)
-
+    return render_template('index.html')
 # 遊戲頁面
 @app.route('/game')
 def game():
