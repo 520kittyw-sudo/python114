@@ -1,12 +1,11 @@
 import os
 from flask import Flask, render_template
 
-# 核心修正：明確告訴 Flask 去哪裡找 templates
-# os.path.dirname(__file__) 會自動抓到 app.py 所在的目錄
-base_dir = os.path.dirname(os.path.abspath(__file__))
-template_dir = os.path.join(base_dir, 'templates')
-
-app = Flask(__name__, template_folder=template_dir)
+# 修改這裡：使用 __file__ 來定位檔案所在絕對路徑，避開相對路徑問題
+# 將 templates 資料夾明確設為 app.py 同層的 /templates
+app = Flask(__name__, 
+            template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'),
+            static_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static'))
 
 @app.route('/')
 def index():
