@@ -7,8 +7,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # 當瀏覽器輸入網址時，顯示首頁
-    return render_template('index.html')
+    # 定義 info 字典，包含 HTML 需要的所有資料
+    info_data = {
+        "title": "幾何人格：山海特質心理賽局網站",
+        "member": "黃琦瑤",
+        "department": "數學系資訊數學組",
+        "description": "本網站結合『動態網頁爬蟲』與『機率統計變異數分析』..."
+    }
+    # 將 info 傳遞給模板
+    return render_template('index.html', info=info_data)
 
 @app.route('/game')
 def game():
