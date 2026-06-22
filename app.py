@@ -1,46 +1,19 @@
-import numpy as np
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# 首頁
 @app.route('/')
 def index():
-    return render_template('index.html')
-# 遊戲頁面
-@app.route('/game')
-def game():
-    info_data = {"title": "幾何賽局 - 挑戰頁"}
-    return render_template('game.html', info=info_data)
-
-# 結果計算頁面
-@app.route('/result', methods=['POST'])
-def result():
-    player_name = request.form.get('player_name')
-    # ... (你的數據取得與計算邏輯) ...
-    
-    # 這裡的變數名稱一定要跟 HTML 裡的一模一樣！
-    return render_template('result.html', 
-                           name=player_name, 
-                           mean=round(mean_val, 2), 
-                           var=round(var_val, 2), 
-                           conclusion=conclusion)
-
-    mean_val = np.mean(data)
-    var_val = np.var(data)
-    
-    if mean_val < 35:
-        conclusion = "海之平穩：你傾向深思熟慮，在動盪中尋求安全感。"
-    elif mean_val < 70:
-        conclusion = "風之脈動：你能在風險與機遇中找到平衡，策略靈活。"
+    # 這裡會打印出伺服器運行的當前目錄
+    print(f"當前工作目錄: {os.getcwd()}")
+    # 這裡會打印出 templates 資料夾內的檔案列表
+    if os.path.exists('templates'):
+        print(f"templates 資料夾內容: {os.listdir('templates')}")
     else:
-        conclusion = "火之狂熱：你是冒險家，敢於在未知中挑戰極限。"
+        print("警告：找不到 templates 資料夾！")
         
-    return render_template('result.html', 
-                           name=player_name, 
-                           mean=round(mean_val, 2), 
-                           var=round(var_val, 2), 
-                           conclusion=conclusion)
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()
