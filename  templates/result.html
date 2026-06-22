@@ -2,23 +2,21 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>分析結果</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>分析報告</title>
 </head>
 <body>
     <div class="container">
-        <h2>📊 幾何人格分析報告</h2>
-        <p>親愛的 <strong>{{ name }}</strong> 妳好：</p>
-        <hr>
-        <div class="result-box">
-            <h3>妳的決策特徵期望值：<span class="highlight">{{ mean }}</span></h3>
-            <h3>妳的決策行為方差 ($\sigma^2$)：<span class="highlight">{{ var }}</span></h3>
-            <br>
-            <h2>分析結論：妳是 {{ personality }}</h2>
+        <h2>幾何人格分析報告</h2>
+        <p>親愛的 {{ name }} 好：</p>
+        
+        <div style="background: #eef; padding: 20px;">
+            <p>你的決策特徵期望值：<strong>{{ mean }}</strong></p>
+            <p>你的決策行為方差 ($\sigma^2$)：<strong>{{ var }}</strong></p>
+            <p><strong>分析結論：{{ conclusion }}</strong></p>
         </div>
-        <p class="footnote">＊本報告透過 NumPy 進行離散程度運算，結果已同步永續儲存於 Render PostgreSQL 雲端資料庫。</p>
+        
         <br>
-        <a href="/" class="btn">回首頁</a>
+        <a href="/game" class="btn">回首頁重新測驗</a>
     </div>
 </body>
 </html>

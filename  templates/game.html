@@ -2,31 +2,40 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <title>幾何賽局挑戰</title>
+    <title>幾何賽局 - 挑戰頁</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
-        <h2>🎲 機率賽局：請分配妳的籌碼風險度</h2>
-        <p>（請拉動滑桿，數值越高代表在該回合願意冒越高風險追求高回報）</p>
-        
-        <form method="POST">
-            <label>妳的名字：</label>
-            <input type="text" name="player_name" required placeholder="請輸入名字"><br><br>
-            
-            <div class="game-round">
-                <label>第一回合（平穩市場）：</label>
-                <input type="range" name="round1" min="0" max="100" value="50">
+        <form action="/result" method="POST">
+            <h2>輸入的名字：</h2>
+            <input type="text" name="player_name" required>
+
+            <div class="round">
+                <h3>第一回合：市場初探</h3>
+                <p>說明：選擇比特幣風險最高，債券最穩。</p>
+                <input type="radio" name="round1" value="90" required> 比特幣 - 梭哈 (風險 90)<br>
+                <input type="radio" name="round1" value="50"> 基金 - 平衡 (風險 50)<br>
+                <input type="radio" name="round1" value="10"> 債券 - 避險 (風險 10)
             </div>
-            <div class="game-round">
-                <label>第二回合（未知暴風雨）：</label>
-                <input type="range" name="round2" min="0" max="100" value="50">
+
+            <div class="round">
+                <h3>第二回合：市場變動</h3>
+                <p>說明：期貨槓桿高風險極大，定存獲利低但極穩。</p>
+                <input type="radio" name="round2" value="95" required> 高槓桿期貨 (風險 95)<br>
+                <input type="radio" name="round2" value="40"> 藍籌股 (風險 40)<br>
+                <input type="radio" name="round2" value="5"> 銀行定存 (風險 5)
             </div>
-            <div class="game-round">
-                <label>第三回合（終極終點線）：</label>
-                <input type="range" name="round3" min="0" max="100" value="50">
+
+            <div class="round">
+                <h3>第三回合：終局博弈</h3>
+                <p>說明：全額投資風險高，完全套現則無風險。</p>
+                <input type="radio" name="round3" value="100" required> 全額投資 - 守成 (風險 100)<br>
+                <input type="radio" name="round3" value="60"> 分批佈局 (風險 60)<br>
+                <input type="radio" name="round3" value="0"> 完全套現 (風險 0)
             </div>
-            
+
+            <br>
             <button type="submit" class="btn">送出決策，進行數學矩陣分析</button>
         </form>
     </div>
