@@ -8,8 +8,13 @@
 <body>
     <div class="card shadow-lg p-5 text-center" style="max-width: 600px;">
         <h2 class="mb-4">幾何人格：山海特質心理賽局網站</h2>
-        <p class="text-muted">本網站透過機率統計變異數分析，刻劃你的性格地圖。</p>
-        <a href="/game/1" class="btn btn-success btn-lg w-100">開始進行賽局測驗</a>
+        
+        <form action="/start" method="POST">
+            <input type="text" name="nickname" class="form-control mb-3" placeholder="請輸入你的暱稱" required>
+            <p class="text-muted">本網站透過機率統計變異數分析，刻劃你的性格地圖。</p>
+            <button type="submit" class="btn btn-success btn-lg w-100">開始進行賽局測驗</button>
+        </form>
+
     </div>
 </body>
 </html>

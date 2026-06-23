@@ -7,13 +7,20 @@
 </head>
 <body>
     <div class="card shadow-lg p-5 text-center" style="max-width: 600px;">
+        <div class="alert alert-success mb-4">
+            <h4 class="alert-heading">{{ message }}</h4>
+            <p>這是為你量身打造的性格地圖分析報告：</p>
+        </div>
+
         <h2 class="mb-4">分析報告</h2>
+        
         <div class="alert alert-info p-4">
             <p>平均期望值：<strong>{{ mean }}</strong></p>
             <p>決策變異數：<strong>{{ var }}</strong></p>
             <hr>
             <p><strong>分析結論：</strong><br>{{ personality }}</p>
         </div>
+        
         <a href="/" class="btn btn-secondary w-100">重新挑戰</a>
     </div>
 </body>

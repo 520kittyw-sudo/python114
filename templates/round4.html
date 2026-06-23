@@ -9,6 +9,11 @@
     <div class="card shadow-lg p-5" style="max-width: 600px;">
         <h2 class="mb-3 text-primary">回合 4/5：產業衝擊</h2>
         <p class="text-muted">新創機會多但風險極高，傳統製造業則發展平穩。</p>
+        
+        <div class="alert alert-warning mt-2">
+          <small>💡 即時市場分析：{{ market_info }}</small>
+        </div>
+
         <form action="/game/4" method="POST">
             <div class="mb-4">
                 <div class="form-check mb-2"><input class="form-check-input" type="radio" name="risk_value" value="85" required id="r1"><label class="form-check-label" for="r1">投入新創產業 (風險 85)</label></div>

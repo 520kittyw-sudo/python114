@@ -9,6 +9,11 @@
     <div class="card shadow-lg p-5" style="max-width: 600px;">
         <h2 class="mb-3 text-primary">回合 3/5：中場博弈</h2>
         <p class="text-muted">全額投資風險高，分批佈局相對穩健。</p>
+
+        <div class="alert alert-warning mt-2">
+         <small>💡 即時市場分析：{{ market_info }}</small>
+        </div>
+        
         <form action="/game/3" method="POST">
             <div class="mb-4">
                 <div class="form-check mb-2"><input class="form-check-input" type="radio" name="risk_value" value="100" required id="r1"><label class="form-check-label" for="r1">全額投資 (風險 100)</label></div>
