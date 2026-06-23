@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa; }</style>
+</head>
+<body>
+    <div class="card shadow-lg p-5" style="max-width: 600px;">
+        <h2 class="mb-3 text-primary">回合 2/5：市場變動</h2>
+        <p class="text-muted">期貨槓桿高風險大，定存獲利低但極穩。</p>
+        <form action="/game/2" method="POST">
+            <div class="mb-4">
+                <div class="form-check mb-2"><input class="form-check-input" type="radio" name="risk_value" value="95" required id="r1"><label class="form-check-label" for="r1">高槓桿期貨 (風險 95)</label></div>
+                <div class="form-check mb-2"><input class="form-check-input" type="radio" name="risk_value" value="40" id="r2"><label class="form-check-label" for="r2">藍籌股 (風險 40)</label></div>
+                <div class="form-check mb-2"><input class="form-check-input" type="radio" name="risk_value" value="5" id="r3"><label class="form-check-label" for="r3">銀行定存 (風險 5)</label></div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">下一步</button>
+        </form>
+    </div>
+</body>
+</html>
